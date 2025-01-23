@@ -54,7 +54,7 @@ ROOT_URLCONF = 'pisces.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],  # 명시적으로 templates 폴더 추가
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
