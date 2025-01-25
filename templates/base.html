@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    {% load static %}  <!-- static 태그를 로드 -->
+    {% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Pisces ML{% endblock %}</title>
@@ -11,31 +11,14 @@
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container">
-                <a class="navbar-brand" href="/">Pisces ML</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="/">홈</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/predict/">예측하기</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
-    <main>
+    {% include 'header.html' %}
+    <main class="container mt-4">
         {% block content %}{% endblock %}
     </main>
-    <footer>
-        <p>&copy; 2025 Pisces ML. All rights reserved.</p>
-    </footer>
+    {% include 'footer.html' %}
+    <!-- jQuery -->
+    <script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+    <!-- Bootstrap JavaScript -->
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
 </body>
 </html>
