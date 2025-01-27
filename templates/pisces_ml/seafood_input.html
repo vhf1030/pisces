@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h1 class="mb-4">수산물 시장별 예측 가격</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <label for="seafood">수산물</label>
+        <input type="text" name="seafood" id="seafood" required>
+        
+        <label for="date">날짜</label>
+        <input type="date" name="date" id="date" required>
+        
+        <button type="submit" class="btn btn-primary mt-3">예측하기</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,10 +1,66 @@
 from django.shortcuts import render
 from django.http import JsonResponse
-
+import os
+import json
 # Create your views here.
 
-def index(request):
-    return render(request, 'pisces_ml/index.html')
+
+def market_overview(request):
+    # !TODO!
+    # 예시 데이터 로드 (JSON 파일 또는 DB에서 가져오기)
+    data_path = os.path.join('static', 'data', 'market_prices.json')
+    with open(data_path, 'r') as file:
+        market_data = json.load(file)
+    
+    context = {'market_data': market_data}
+    return render(request, 'pisces_ml/market_overview.html', context)
+
+
+
+def predict_seafood_price(request):
+    if request.method == 'POST':
+        seafood = request.POST.get('seafood')
+        date = request.POST.get('date')
+
+        # 예측 로직 (머신러닝 모델 사용)
+        # 여기에 모델 호출 코드를 작성하세요.
+        prediction = {
+            "Market 1": 1234.56,
+            "Market 2": 2345.67,
+            "Market 3": 3456.78,
+        }
+
+        return render(request, 'pisces_ml/seafood_prediction.html', {
+            'seafood': seafood,
+            'date': date,
+            'prediction': prediction
+        })
+    return render(request, 'pisces_ml/seafood_input.html')
+
+
+def predict_market_prices(request):
+    if request.method == 'POST':
+        market = request.POST.get('market')
+        date = request.POST.get('date')
+
+        # 예측 로직 (머신러닝 모델 사용)
+        # 여기에 모델 호출 코드를 작성하세요.
+        prediction = {
+            "Seafood 1": 1234.56,
+            "Seafood 2": 2345.67,
+            "Seafood 3": 3456.78,
+        }
+
+        return render(request, 'pisces_ml/market_prediction.html', {
+            'market': market,
+            'date': date,
+            'prediction': prediction
+        })
+    return render(request, 'pisces_ml/market_input.html')
+
+
+# def index(request):
+#     return render(request, 'pisces_ml/index.html')
 
 # 임시 모델 예측 함수 (머신러닝 모델 로드 시 대체)
 def mock_predict(market, item, date):
@@ -15,7 +71,7 @@ def predict_page(request):
     """입력 폼 및 결과 페이지"""
     return render(request, 'pisces_ml/predict.html')
 
-def predict(request):
+def predict(request):  # to be deprecated
     """예측 요청 처리"""
     if request.method == 'POST':
         market = request.POST.get('market')

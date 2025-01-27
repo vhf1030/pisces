@@ -1,3 +1,136 @@
+# Pisces ML: 수산물 가격 예측 서비스
+
+Pisces ML은 11개의 마켓과 7종의 수산물을 대상으로 한 머신러닝 기반 수산물 가격 예측 웹 애플리케이션입니다. 이 프로젝트는 사용자가 원하는 날짜, 수산물, 시장 정보를 기반으로 예측 가격을 제공하고, 현재까지의 시장 시가를 시각화하는 기능을 제공합니다.
+
+---
+
+## **기능**
+
+### **1. 수산물별 전체 마켓 시가 현황 시각화**
+- 현재까지의 마켓별 시가를 차트로 시각화하여 사용자에게 제공합니다.
+- 사용된 도구:
+  - Django (백엔드)
+  - Chart.js (프론트엔드 차트 시각화)
+
+### **2. 특정 날짜와 수산물 입력 시 시장별 예측 가격 제공**
+- 사용자가 날짜와 수산물을 입력하면, 각 시장의 예측 가격을 제공합니다.
+- 머신러닝 모델을 호출하여 실시간 예측 결과를 표시합니다.
+
+### **3. 특정 날짜와 시장 입력 시 수산물별 예측 가격 제공**
+- 특정 시장에서 수산물별 예측 가격을 사용자에게 제공합니다.
+- 날짜와 시장 정보를 기반으로 데이터 처리가 이루어집니다.
+
+---
+
+## **설치 및 실행**
+
+### **1. 요구 사항**
+- Python 3.10 이상
+- Django 4.0 이상
+- Node.js (선택, 프론트엔드 개발 시 필요)
+
+### **2. 설치 절차**
+1. **프로젝트 클론**
+   ```bash
+   git clone https://github.com/vhf1030/pisces.git
+   cd project_pisces
+   ```
+
+2. **가상 환경 생성 및 활성화**
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # Windows: venv\Scripts\activate
+   ```
+
+3. **필수 패키지 설치**
+   ```bash
+   pip install -r requirements.txt  # todo
+   ```
+
+4. **정적 파일 로드**
+   ```bash
+   python manage.py collectstatic
+   ```
+
+5. **개발 서버 실행**
+   ```bash
+   python manage.py runserver
+   ```
+
+6. **브라우저에서 접속**
+   - URL: `http://127.0.0.1:8000/`
+
+---
+
+## **프로젝트 구조**
+
+```plaintext
+project_pisces/
+├── manage.py
+├── pisces/              # 프로젝트 설정 디렉터리
+│   ├── settings.py      # Django 설정 파일
+│   ├── urls.py          # URL 라우팅
+│
+├── pisces_ml/           # 주요 앱 디렉터리
+│   ├── views.py         # Django View 로직
+│   ├── templates/       # 템플릿 디렉터리
+│   │   ├── base.html    # 공통 템플릿
+│   │   ├── market_overview.html  # 시각화 페이지 템플릿
+│   │   ├── seafood_input.html    # 수산물 예측 입력 페이지
+│   │   ├── seafood_prediction.html  # 수산물 예측 결과 페이지
+│   │   ├── market_input.html     # 시장 예측 입력 페이지
+│   │   └── market_prediction.html  # 시장 예측 결과 페이지
+│   ├── static/          # 정적 파일 (CSS, JS 등)
+│   │   ├── css/
+│   │   │   ├── bootstrap.min.css
+│   │   │   ├── styles.css
+│   │   ├── js/
+│   │       ├── bootstrap.min.js
+│   │       ├── jquery-3.6.0.min.js
+│
+└── templates
+    ├── base.html      # 공통 템플릿
+    ├── footer.html    # 헤더 분리 템플릿
+    ├── header.html    # 푸터 분리 템플릿
+    └── pisces_ml
+        ├── index.html  # test
+        ├── predict.html  # test
+        ├── market_overview.html  # 시각화 페이지 템플릿
+        ├── seafood_input.html    # 수산물 예측 입력 페이지
+        ├── seafood_prediction.html  # 수산물 예측 결과 페이지
+        ├── market_input.html     # 시장 예측 입력 페이지
+        └── market_prediction.html  # 시장 예측 결과 페이지
+```
+
+---
+
+## **사용된 주요 기술 스택**
+
+### **백엔드**
+- Django: Python 기반 웹 프레임워크
+- Django REST Framework: API 개발
+
+### **프론트엔드**
+- HTML, CSS (Bootstrap)
+- JavaScript (Chart.js)
+
+### **머신러닝**
+- Python 머신러닝 라이브러리 (예: scikit-learn, XGBoost 등)
+- 학습된 모델 저장 및 로드 (Pickle)
+
+---
+
+## **향후 개선 사항**
+1. **배포 환경 준비**:
+   - wanted 서버 연동
+2. **사용자 친화적인 입력 인터페이스**:
+   - 자동 완성 기능 추가 (시장 및 수산물 선택).
+3. **예측 결과 시각화 개선**:
+   - 그래프 및 차트 스타일 최적화.
+4. **알림 서비스 연동**:
+   - 예측 가격 알림을 위한 이메일/SMS 서비스 연동.
+
+---
 
 - 프로젝트 생성
 ```
@@ -10,3 +143,12 @@ $ python manage.py startapp pisces_ml
 $ python manage.py runserver
 ```
 
+TODO:
+- 원티드 서버 연동
+- 기능 테스트
+- 테스트 브랜치 생성
+- 팀원 깃 연동
+- ml 모델 연동
+- 화면 꾸미기
+
+# ssh wanted-1@100.83.113.125
