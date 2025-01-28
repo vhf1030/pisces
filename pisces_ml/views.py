@@ -2,6 +2,7 @@ from django.shortcuts import render  # type: ignore
 from django.http import JsonResponse  # type: ignore
 import os
 import json
+from datetime import datetime
 # Create your views here.
 
 
@@ -17,46 +18,87 @@ def market_overview(request):
 
 
 
-def predict_seafood_price(request):
-    if request.method == 'POST':
-        seafood = request.POST.get('seafood')
-        date = request.POST.get('date')
+# def predict_seafood_price(request):
+#     if request.method == 'POST':
+#         seafood = request.POST.get('seafood')
+#         date = request.POST.get('date')
 
-        # 예측 로직 (머신러닝 모델 사용)
-        # 여기에 모델 호출 코드를 작성하세요.
-        prediction = {
-            "Market 1": 1234.56,
-            "Market 2": 2345.67,
-            "Market 3": 3456.78,
-        }
+#         # 예측 로직 (머신러닝 모델 사용)
+#         # 여기에 모델 호출 코드를 작성하세요.
+#         prediction = {
+#             "Market 1": 1234.56,
+#             "Market 2": 2345.67,
+#             "Market 3": 3456.78,
+#         }
 
-        return render(request, 'pisces_ml/seafood_prediction.html', {
-            'seafood': seafood,
-            'date': date,
-            'prediction': prediction
-        })
-    return render(request, 'pisces_ml/seafood_input.html')
+#         return render(request, 'pisces_ml/seafood_prediction.html', {
+#             'seafood': seafood,
+#             'date': date,
+#             'prediction': prediction
+#         })
+#     return render(request, 'pisces_ml/seafood_input.html')
 
 
-def predict_market_prices(request):
+# def predict_market_prices(request):
+#     if request.method == 'POST':
+#         market = request.POST.get('market')
+#         date = request.POST.get('date')
+
+#         # 예측 로직 (머신러닝 모델 사용)
+#         # 여기에 모델 호출 코드를 작성하세요.
+#         prediction = {
+#             "Seafood 1": 1234.56,
+#             "Seafood 2": 2345.67,
+#             "Seafood 3": 3456.78,
+#         }
+
+#         return render(request, 'pisces_ml/market_prediction.html', {
+#             'market': market,
+#             'date': date,
+#             'prediction': prediction
+#         })
+#     return render(request, 'pisces_ml/market_input.html')
+
+
+def predict_market(request):
     if request.method == 'POST':
         market = request.POST.get('market')
         date = request.POST.get('date')
 
-        # 예측 로직 (머신러닝 모델 사용)
-        # 여기에 모델 호출 코드를 작성하세요.
+        # 예측 로직
         prediction = {
-            "Seafood 1": 1234.56,
-            "Seafood 2": 2345.67,
-            "Seafood 3": 3456.78,
+            "농어": 12345,
+            "광어": 67890,
         }
 
-        return render(request, 'pisces_ml/market_prediction.html', {
+        return render(request, 'pisces_ml/market_template.html', {
+            'prediction': prediction,
             'market': market,
-            'date': date,
-            'prediction': prediction
+            'date': date
         })
-    return render(request, 'pisces_ml/market_input.html')
+
+    return render(request, 'pisces_ml/market_template.html', {'market': None, 'date': None})
+
+
+
+def predict_seafood(request):
+    if request.method == 'POST':
+        seafood = request.POST.get('seafood')
+        date = request.POST.get('date')
+
+        # 예측 로직
+        prediction = {
+            "가락시장": 12345,
+            "구리농수산물시장": 67890,
+        }
+
+        return render(request, 'pisces_ml/seafood_template.html', {
+            'prediction': prediction,
+            'seafood': seafood,
+            'date': date
+        })
+
+    return render(request, 'pisces_ml/seafood_template.html', {'seafood': None, 'date': None})
 
 
 # def index(request):
@@ -65,7 +107,7 @@ def predict_market_prices(request):
 # 임시 모델 예측 함수 (머신러닝 모델 로드 시 대체)
 def mock_predict(market, item, date):
     # 예시: 시장 이름, 품목, 날짜를 기반으로 간단한 예측
-    return f"${len(market) * 10 + len(item) * 5 + int(date.split('-')[2])}"
+    return f"{hash(market) % 100 * 10 + hash(item) % 1000 * 100 + hash(date.split('-')[2]) % 100 * 10}원"
 
 def predict_page(request):
     """입력 폼 및 결과 페이지"""

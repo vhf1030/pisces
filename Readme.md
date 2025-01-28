@@ -166,6 +166,7 @@ $ python manage.py runserver
 
 TODO:
 - 1차 개발
+    - 이전 가격 정보 시각화
     - ml 모델 연동
     - 원티드 서버 연동
     - 기능 테스트
