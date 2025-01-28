@@ -76,15 +76,21 @@ project_pisces/
 │   ├── services/        # 주요 서비스 로직 디렉터리
 │   │   ├── data_preprocessor.py  # 데이터 로드 및 전처리 클래스
 │   │   └── seafood_price_predictor.py  # 수산물 예측 클래스
-│   ├── resources/       # 데이터 및 모델 파일 디렉터리
-│   │   ├── models/      # 모델 파일 디렉터리
-│   │   │   ├── mackerel_model.pkl  # 고등어 모델 파일
-│   │   │   ├── tuna_model.pkl      # 참치 모델 파일
-│   │   │   └── shrimp_model.pkl    # 새우 모델 파일
-│   │   ├── data/        # CSV 데이터 디렉터리
-│   │       ├── mackerel_data.csv   # 고등어 데이터 파일
-│   │       ├── tuna_data.csv       # 참치 데이터 파일
-│   │       └── shrimp_data.csv     # 새우 데이터 파일
+│   ├── models/          # 데이터 및 모델 파일 디렉터리
+│   │   ├── 농어_model.pkl       # 농어 모델 파일
+│   │   ├── 광어_model.pkl       # 광어 모델 파일
+│   │   ├── 대게_model.pkl       # 대게 모델 파일
+│   │   ├── 연어_model.pkl       # 연어 모델 파일
+│   │   ├── 우럭_model.pkl       # 우럭 모델 파일
+│   │   ├── 참돔_model.pkl       # 참돔 모델 파일
+│   │   ├── 방어_model.pkl       # 방어 모델 파일
+│   │   ├── 농어_data.csv        # 농어 데이터 파일
+│   │   ├── 광어_data.csv        # 광어 데이터 파일
+│   │   ├── 대게_data.csv        # 대게 데이터 파일
+│   │   ├── 연어_data.csv        # 연어 데이터 파일
+│   │   ├── 우럭_data.csv        # 우럭 데이터 파일
+│   │   ├── 참돔_data.csv        # 참돔 데이터 파일
+│   │   └── 방어_data.csv        # 방어 데이터 파일
 │   └── templates/       # 템플릿 디렉터리
 │       ├── base.html    # 공통 템플릿
 │       ├── market_overview.html  # 시각화 페이지 템플릿
@@ -112,6 +118,7 @@ project_pisces/
         ├── seafood_prediction.html  # 수산물 예측 결과 페이지
         ├── market_input.html     # 시장 예측 입력 페이지
         └── market_prediction.html  # 시장 예측 결과 페이지
+
 
 ```
 
