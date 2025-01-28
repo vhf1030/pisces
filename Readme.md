@@ -1,6 +1,6 @@
 # Pisces ML: 수산물 가격 예측 서비스
 
-Pisces ML은 11개의 마켓과 7종의 수산물을 대상으로 한 머신러닝 기반 수산물 가격 예측 웹 애플리케이션입니다. 이 프로젝트는 사용자가 원하는 날짜, 수산물, 시장 정보를 기반으로 예측 가격을 제공하고, 현재까지의 시장 시가를 시각화하는 기능을 제공합니다.
+Pisces ML은 10개의 마켓과 7종의 수산물을 대상으로 한 머신러닝 기반 수산물 가격 예측 웹 애플리케이션입니다. 이 프로젝트는 사용자가 원하는 날짜, 수산물, 시장 정보를 기반으로 예측 가격을 제공하고, 현재까지의 시장 시가를 시각화하는 기능을 제공합니다.
 
 ---
 
@@ -73,33 +73,46 @@ project_pisces/
 │
 ├── pisces_ml/           # 주요 앱 디렉터리
 │   ├── views.py         # Django View 로직
-│   ├── templates/       # 템플릿 디렉터리
-│   │   ├── base.html    # 공통 템플릿
-│   │   ├── market_overview.html  # 시각화 페이지 템플릿
-│   │   ├── seafood_input.html    # 수산물 예측 입력 페이지
-│   │   ├── seafood_prediction.html  # 수산물 예측 결과 페이지
-│   │   ├── market_input.html     # 시장 예측 입력 페이지
-│   │   └── market_prediction.html  # 시장 예측 결과 페이지
-│   ├── static/          # 정적 파일 (CSS, JS 등)
-│   │   ├── css/
-│   │   │   ├── bootstrap.min.css
-│   │   │   ├── styles.css
-│   │   ├── js/
-│   │       ├── bootstrap.min.js
-│   │       ├── jquery-3.6.0.min.js
+│   ├── services/        # 주요 서비스 로직 디렉터리
+│   │   ├── data_preprocessor.py  # 데이터 로드 및 전처리 클래스
+│   │   └── seafood_price_predictor.py  # 수산물 예측 클래스
+│   ├── resources/       # 데이터 및 모델 파일 디렉터리
+│   │   ├── models/      # 모델 파일 디렉터리
+│   │   │   ├── mackerel_model.pkl  # 고등어 모델 파일
+│   │   │   ├── tuna_model.pkl      # 참치 모델 파일
+│   │   │   └── shrimp_model.pkl    # 새우 모델 파일
+│   │   ├── data/        # CSV 데이터 디렉터리
+│   │       ├── mackerel_data.csv   # 고등어 데이터 파일
+│   │       ├── tuna_data.csv       # 참치 데이터 파일
+│   │       └── shrimp_data.csv     # 새우 데이터 파일
+│   └── templates/       # 템플릿 디렉터리
+│       ├── base.html    # 공통 템플릿
+│       ├── market_overview.html  # 시각화 페이지 템플릿
+│       ├── seafood_input.html    # 수산물 예측 입력 페이지
+│       ├── seafood_prediction.html  # 수산물 예측 결과 페이지
+│       ├── market_input.html     # 시장 예측 입력 페이지
+│       └── market_prediction.html  # 시장 예측 결과 페이지
+├── static/          # 정적 파일 (CSS, JS 등)
+│       ├── css/
+│       │   ├── bootstrap.min.css
+│       │   ├── styles.css
+│       └── js/
+│           ├── bootstrap.min.js
+│           └── jquery-3.6.0.min.js
 │
 └── templates
     ├── base.html      # 공통 템플릿
-    ├── footer.html    # 헤더 분리 템플릿
-    ├── header.html    # 푸터 분리 템플릿
+    ├── footer.html    # 푸터 분리 템플릿
+    ├── header.html    # 헤더 분리 템플릿
     └── pisces_ml
-        ├── index.html  # test
-        ├── predict.html  # test
+        ├── index.html  # 테스트 페이지
+        ├── predict.html  # 테스트 페이지
         ├── market_overview.html  # 시각화 페이지 템플릿
         ├── seafood_input.html    # 수산물 예측 입력 페이지
         ├── seafood_prediction.html  # 수산물 예측 결과 페이지
         ├── market_input.html     # 시장 예측 입력 페이지
         └── market_prediction.html  # 시장 예측 결과 페이지
+
 ```
 
 ---
@@ -144,11 +157,11 @@ $ python manage.py runserver
 ```
 
 TODO:
+- ml 모델 연동
 - 원티드 서버 연동
 - 기능 테스트
 - 테스트 브랜치 생성
 - 팀원 깃 연동
-- ml 모델 연동
 - 화면 꾸미기
 
 # ssh wanted-1@100.83.113.125

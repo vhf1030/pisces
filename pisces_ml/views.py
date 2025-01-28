@@ -1,5 +1,5 @@
-from django.shortcuts import render
-from django.http import JsonResponse
+from django.shortcuts import render  # type: ignore
+from django.http import JsonResponse  # type: ignore
 import os
 import json
 # Create your views here.
