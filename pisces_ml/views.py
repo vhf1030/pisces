@@ -5,6 +5,8 @@ import json
 from datetime import datetime
 # Create your views here.
 
+from pisces_ml.production.services.predict import SeafoodPricePredictor
+
 
 def market_overview(request):
     # !TODO!
@@ -115,6 +117,7 @@ def predict_page(request):
 
 def predict(request):  # to be deprecated
     """예측 요청 처리"""
+    predictor = SeafoodPricePredictor()
     if request.method == 'POST':
         market = request.POST.get('market')
         item = request.POST.get('item')
@@ -124,8 +127,10 @@ def predict(request):  # to be deprecated
                 raise ValueError("All fields are required.")
 
             # 임시 예측 로직 (머신러닝 모델 로드 후 대체)
-            prediction = mock_predict(market, item, date)
-            return JsonResponse({'prediction': prediction})
+            prediction = predictor.predict(date, item, market)
+            # return JsonResponse({'prediction': prediction})
+            print(prediction)
+            return JsonResponse({'prediction': round(prediction['predictions'])})
         except Exception as e:
             return JsonResponse({'error': str(e)}, status=400)
     else:

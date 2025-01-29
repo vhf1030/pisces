@@ -34,7 +34,8 @@ Pisces ML은 10개의 마켓과 7종의 수산물을 대상으로 한 머신러�
 1. **프로젝트 클론**
    ```bash
    git clone https://github.com/vhf1030/pisces.git
-   cd project_pisces
+   git fetch --all
+   git checkout test
    ```
 
 2. **가상 환경 생성 및 활성화**
