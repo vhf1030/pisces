@@ -8,7 +8,7 @@ urlpatterns = [
     # path('', views.market_overview, name='market_overview'),  # TODO
     # path('predict/seafood/', views.predict_seafood_price, name='predict_seafood_price'),  # TODO
     # path('predict/market/', views.predict_market_prices, name='predict_market_prices'),  # TODO
-    path('predict/seafood/', views.predict_seafood, name='predict_seafood_price'),  # TODO
+    path('predict/fish/', views.predict_fish, name='predict_fish_price'),  # TODO
     path('predict/market/', views.predict_market, name='predict_market_prices'),  # TODO
 ]
 
