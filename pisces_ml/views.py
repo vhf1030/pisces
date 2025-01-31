@@ -2,11 +2,11 @@ from django.shortcuts import render  # type: ignore
 from django.http import JsonResponse  # type: ignore
 import os
 import json
-from datetime import datetime
+from datetime import datetime, date, timedelta
 # Create your views here.
 
 from pisces_ml.production.services.predict import SeafoodPricePredictor
-
+from pisces_ml.production.services.visualization import price_plot
 
 predictor = SeafoodPricePredictor()
 
@@ -20,6 +20,23 @@ def market_overview(request):
     
     context = {'market_data': market_data}
     return render(request, 'pisces_ml/market_overview.html', context)
+
+
+def price_visualization(request):
+    days = int(request.GET.get("days", 365))  # 사용자가 선택한 날짜 범위 (기본값: 365일)
+
+    # 가격 데이터 로드 (각 어종별 그래프를 위한 데이터 준비)
+    fish_types = ["광어", "우럭", "참돔", "연어", "대게", "방어", "농어"]  # 전체 어종 목록
+    chart_data = {fish: price_plot(fish, days) for fish in fish_types}  # 어종별 시각화 데이터 수집
+
+    # JSON 변환 (한글 깨짐 방지)
+    chart_data_json = json.dumps(chart_data, ensure_ascii=False)
+
+    return render(request, "pisces_ml/price_chart.html", {
+        "chart_data": chart_data_json,
+        "selected_days": days,
+        "fish_types": fish_types,
+    })
 
 
 def predict_fish(request):

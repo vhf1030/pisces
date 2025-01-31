@@ -10,5 +10,6 @@ urlpatterns = [
     # path('predict/market/', views.predict_market_prices, name='predict_market_prices'),  # TODO
     path('predict/fish/', views.predict_fish, name='predict_fish_price'),  # TODO
     path('predict/market/', views.predict_market, name='predict_market_prices'),  # TODO
+    path('price_chart/', views.price_visualization, name='price_chart'),
 ]
 
