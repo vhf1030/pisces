@@ -2,7 +2,8 @@ import joblib  # type: ignore
 import numpy as np  # type: ignore
 import pandas as pd  # type: ignore
 from datetime import datetime
-# from src.production.services.load_data import DataPreprocessor
+# from .load_data import DataPreprocessor
+from .metadata import FISH_INFO
 
 
 class SeafoodPricePredictor:
@@ -17,6 +18,7 @@ class SeafoodPricePredictor:
         self.model_path = "pisces_ml/production/model/"
         self.data = self.load_data()
         self.model = self.load_model()
+        self.fish_info = FISH_INFO
 
     def load_data(self):
         """

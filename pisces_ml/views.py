@@ -48,9 +48,16 @@ def predict_fish(request):
 
         if fish and date:
             result = predictor.predict_fish(date, fish)
-            print("예측 결과:", result)  # 터미널에서 확인
-
-        return render(request, 'pisces_ml/fish_template.html', {'fish': fish, 'date': date, 'result': result})
+            item_info = predictor.fish_info[fish]
+            context = {
+                'fish': fish,
+                'date': date,
+                'result': result,
+                'item_info': item_info
+            }
+            print("예측 결과:", context)  # 터미널에서 확인
+            
+        return render(request, 'pisces_ml/fish_template.html', context)
 
     return render(request, 'pisces_ml/fish_template.html', {'fish': None, 'date': None})
 
@@ -93,11 +100,16 @@ def predict(request):  # to be deprecated
             if not market or not item or not date:
                 raise ValueError("All fields are required.")
 
-            # 임시 예측 로직 (머신러닝 모델 로드 후 대체)
             prediction = predictor.predict(date, item, market)
+            fish_info = predictor.fish_info
             # return JsonResponse({'prediction': prediction})
             print(prediction)
-            return JsonResponse({'prediction': round(prediction['predictions'])})
+            
+            context = {
+                'prediction': round(prediction['predictions']),
+                'item_info': fish_info['item']
+            }
+            return JsonResponse(context)
         except Exception as e:
             return JsonResponse({'error': str(e)}, status=400)
     else:

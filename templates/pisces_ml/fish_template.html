@@ -30,6 +30,19 @@
 {% if result %}
     <!-- 결과 출력 -->
     <div class="result-section mt-5">
+        <h2 class="mb-3">{{ fish }} 상세 정보</h2>
+            <table class="table table-bordered">
+                <tbody>
+                    <tr><th>상태</th><td>{{ item_info.state }}</td></tr>
+                    <tr><th>양식 여부</th><td>{{ item_info.raised }}</td></tr>
+                    <tr><th>크기</th><td>{{ item_info.size }}</td></tr>
+                    <tr><th>크기 기준</th><td>{{ item_info.sizeCriteria }}</td></tr>
+                    <tr><th>원산지</th><td>{{ item_info.origin }}</td></tr>
+                    <tr><th>지역</th><td>{{ item_info.region }}</td></tr>
+                    <tr><th>단위</th><td>{{ item_info.unit }}</td></tr>
+                </tbody>
+            </table>
+
         <h2 class="mb-3">예측 결과</h2>
 
         <div class="card">
