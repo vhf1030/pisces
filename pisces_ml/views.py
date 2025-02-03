@@ -71,9 +71,14 @@ def predict_market(request):
 
         if market and date:
             result = predictor.predict_market(date, market)
-            print("예측 결과:", result)  # 터미널에서 확인
+            context = {
+                'market': market,
+                'date': date,
+                'result': result
+            }
+            print("예측 결과:", context)  # 터미널에서 확인
 
-        return render(request, 'pisces_ml/market_template.html', {'market': market, 'date': date, 'result': result})
+        return render(request, 'pisces_ml/market_template.html', context)
 
     return render(request, 'pisces_ml/market_template.html', {'market': None, 'date': None})
 
@@ -81,10 +86,10 @@ def predict_market(request):
 # def index(request):
 #     return render(request, 'pisces_ml/index.html')
 
-# 임시 모델 예측 함수 (머신러닝 모델 로드 시 대체)
-def mock_predict(market, item, date):
-    # 예시: 시장 이름, 품목, 날짜를 기반으로 간단한 예측
-    return f"{hash(market) % 100 * 10 + hash(item) % 1000 * 100 + hash(date.split('-')[2]) % 100 * 10}원"
+# # 임시 모델 예측 함수 (머신러닝 모델 로드 시 대체)
+# def mock_predict(market, item, date):
+#     # 예시: 시장 이름, 품목, 날짜를 기반으로 간단한 예측
+#     return f"{hash(market) % 100 * 10 + hash(item) % 1000 * 100 + hash(date.split('-')[2]) % 100 * 10}원"
 
 def predict_page(request):
     """입력 폼 및 결과 페이지"""
@@ -101,13 +106,14 @@ def predict(request):  # to be deprecated
                 raise ValueError("All fields are required.")
 
             prediction = predictor.predict(date, item, market)
-            fish_info = predictor.fish_info
+            # fish_info = predictor.fish_info
             # return JsonResponse({'prediction': prediction})
             print(prediction)
             
             context = {
                 'prediction': round(prediction['predictions']),
-                'item_info': fish_info[item]
+                # 'item_info': fish_info[item],
+                'item_info': prediction['info']
             }
             return JsonResponse(context)
         except Exception as e:

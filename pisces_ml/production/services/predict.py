@@ -77,8 +77,15 @@ class SeafoodPricePredictor:
             return
 
         predicted_price = model.predict(input_data)[0][date_difference]
+        result = {
+            "date": date,
+            "fish": fish,
+            "info": self.fish_info[fish],
+            "market": market,
+            "predictions": predicted_price
+        }
     
-        return {"date": date, "fish": fish, "market": market, "predictions": predicted_price}
+        return result
 
     def predict_fish(self, date, fish):
         '''
