@@ -69,7 +69,9 @@
             const resultDiv = document.getElementById('result');
             resultDiv.style.display = 'block';
             if (data.prediction !== undefined) {
-                resultDiv.textContent = `예측 가격: ${data.prediction} 원`;
+                const formattedPrediction = new Intl.NumberFormat('ko-KR').format(data.prediction);
+
+                resultDiv.textContent = `예측 가격: ${formattedPrediction} 원`;
                 resultDiv.className = 'mt-4 alert alert-success';
             } else {
                 resultDiv.textContent = `오류: ${data.error}`;

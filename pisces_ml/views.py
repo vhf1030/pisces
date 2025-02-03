@@ -107,7 +107,7 @@ def predict(request):  # to be deprecated
             
             context = {
                 'prediction': round(prediction['predictions']),
-                'item_info': fish_info['item']
+                'item_info': fish_info[item]
             }
             return JsonResponse(context)
         except Exception as e:
