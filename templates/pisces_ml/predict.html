@@ -6,9 +6,9 @@
     <form id="predictionForm" method="POST">
         {% csrf_token %}
         <div class="mb-3">
-            <label for="market" class="form-label">시장 이름</label>
+            <label for="market" class="form-label">시장</label>
             <select class="form-select" id="market" name="market" required>
-                <option value="" disabled selected>시장 이름을 선택하세요</option>
+                <option value="" disabled selected>시장을 선택하세요</option>
                 <option value="가락시장">가락시장</option>
                 <option value="강서농수산물시장">강서농수산물시장</option>
                 <option value="구리농수산물시장">구리농수산물시장</option>
@@ -22,9 +22,9 @@
             </select>
         </div>
         <div class="mb-3">
-            <label for="item" class="form-label">품목 (어종)</label>
+            <label for="item" class="form-label">어종</label>
             <select class="form-select" id="item" name="item" required>
-                <option value="" disabled selected>품목(어종)을 선택하세요</option>
+                <option value="" disabled selected>어종을 선택하세요</option>
                 <option value="농어">농어</option>
                 <option value="광어">광어</option>
                 <option value="대게">대게</option>
