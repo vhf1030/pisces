@@ -47,7 +47,7 @@
                     <tbody>
                         {% for fish, prediction in result.items %}
                             <tr>
-                                <td>{{ fish }} ({{ prediction.info.state }}, {{ prediction.info.unit }})</td>
+                                <td>{{ fish }} {% if prediction and prediction.predictions is not None %} ({{ prediction.info.state }}, {{ prediction.info.unit }}) {% endif %}</td>
                                 <td>
                                     {% if prediction and prediction.predictions is not None %}
                                         {% load humanize %}
